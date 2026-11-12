@@ -15,6 +15,9 @@
 | `script.js` | 테마 토글, `data/projects.json` 읽어서 카드 렌더링, 축 필터 |
 | `swarm.js` / `swarm.css` | 스크롤 시 여러 커서가 블록을 "짓는" 빌드 애니메이션. JS 없음·`prefers-reduced-motion: reduce`·건너뛰기 선택(`localStorage` `swarm=off`) 시 동작 안 함. footer 버튼으로 다시 켜기 |
 | `data/projects.json` | 프로젝트 목록 |
+| `data/booth.json` | BOOTH 하트(위시리스트) 수. GitHub Actions가 갱신, 손으로 고치지 않음 |
+| `scripts/update-booth.mjs` | `booth.json` 갱신 스크립트 (Node 18+, 표준 기능만) |
+| `.github/workflows/booth-hearts.yml` | 6시간마다 갱신 스크립트 실행 |
 | `assets/` | 프로젝트 이미지 |
 
 ## 프로젝트 추가
@@ -57,6 +60,22 @@
 - 배열 순서 = 화면 순서 (`vrchat` 축만 `published_at` 최신순)
 - 이미지는 `assets/`에 두고 수백 KB 이하로 유지
 - JSON 문법 오류나 파일 읽기 실패 시 카드 자리에 안내 문구 표시. 수정 후 로컬 확인 권장
+
+## BOOTH 하트 수 자동 갱신
+
+- 동작: workflow가 6시간마다(UTC 기준 매 6시간 17분) `scripts/update-booth.mjs` 실행 → 값이 바뀌었을 때만 `data/booth.json`을 `github-actions[bot]` 이름으로 commit·push
+- 대상: `data/projects.json`의 `links.booth`에 있는 모든 상품. 상품 추가 시 스크립트 수정 불필요
+- 데이터 출처: `https://booth.pm/ko/items/<id>.json`의 `wish_lists_count`. 공식 문서화된 API가 아니라 형식 변경·차단 가능성 있음
+- 안전장치
+  - 요청 사이 1.5초 간격
+  - 실패, 비정상 응답, 숫자가 아닌 값인 상품은 기존 값 유지
+  - 전부 실패하면 파일을 건드리지 않고 workflow 실패로 종료
+  - 값 변화가 없으면 commit 없음(`updated_at`도 값이 바뀔 때만 갱신)
+- 화면: VRChat 카드마다 하트 수, VRChat 제목 옆에 합계. 마지막 갱신 시각은 마우스를 올리면 보이는 `title`. `booth.json`이 없거나 읽지 못하면 하트 표시만 빠짐
+- 수동 실행
+  - GitHub: repo의 Actions 탭 → "Update BOOTH hearts" → Run workflow
+  - 로컬: 이 폴더에서 `node scripts/update-booth.mjs` (테스트용 경로 지정: `--projects <파일> --out <파일>`)
+- 주의: public repo에서 60일간 활동(commit 등)이 없으면 GitHub가 schedule workflow를 자동으로 끔. 그때는 Actions 탭에서 다시 Enable
 
 ## 로컬에서 보기
 

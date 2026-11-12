@@ -36,6 +36,11 @@
 /* ---------- Projects ---------- */
 (() => {
   const DATA_URL = "data/projects.json";
+  const BOOTH_URL = "data/booth.json"; // heart counts, refreshed by GitHub Actions
+  const numberFmt = new Intl.NumberFormat("ko-KR");
+  const HEART_SVG =
+    '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">' +
+    '<path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2Z" fill="currentColor"/></svg>';
   const LINK_LABELS = { repo: "GitHub", repo2: "GitHub", demo: "Demo", booth: "BOOTH", video: "Video" };
   const lists = {
     backend: document.querySelector('[data-list="backend"]'),
@@ -61,7 +66,35 @@
       .map(([key, url]) => el("a", { href: url, text: labels[key] || key }));
   };
 
-  const card = (p) => {
+  const boothId = (p) => {
+    const m = typeof p.links?.booth === "string" && p.links.booth.match(/items\/(\d+)/);
+    return m ? m[1] : null;
+  };
+
+  // Valid count for this project, or null (missing file, unknown item, bad value).
+  const heartsFor = (p, booth) => {
+    const n = booth?.items?.[boothId(p)]?.wish_lists_count;
+    return Number.isInteger(n) && n >= 0 ? n : null;
+  };
+
+  const heartBadge = (n, cls, label) => {
+    const badge = el("span", { class: cls });
+    badge.innerHTML = HEART_SVG;
+    badge.append(
+      el("span", { "aria-hidden": "true", text: numberFmt.format(n) }),
+      el("span", { class: "visually-hidden", text: `${label} ${numberFmt.format(n)}개` }),
+    );
+    return badge;
+  };
+
+  const updatedTitle = (booth) => {
+    const t = booth?.updated_at ? new Date(booth.updated_at) : null;
+    return t && !Number.isNaN(t.getTime())
+      ? `BOOTH 하트(위시리스트) 수 · 마지막 갱신 ${t.toLocaleString("ko-KR")}`
+      : "BOOTH 하트(위시리스트) 수";
+  };
+
+  const card = (p, booth) => {
     const hasImage = p.image && p.image.src;
     const article = el("article", { class: hasImage ? "card" : "card compact" });
 
@@ -79,8 +112,14 @@
       article.append(el("div", { class: "card-media" }, img));
     }
 
-    const body = el("div", { class: "card-body" }, [
+    const hearts = heartsFor(p, booth);
+    const heading = el("div", { class: "card-head" }, [
       el("h4", { text: p.title }),
+      hearts == null ? null : heartBadge(hearts, "hearts", "BOOTH 하트"),
+    ]);
+    if (hearts != null) heading.lastChild.title = updatedTitle(booth);
+    const body = el("div", { class: "card-body" }, [
+      heading,
       p.summary_ko ? el("p", { class: "summary", text: p.summary_ko }) : null,
       p.summary_en ? el("p", { class: "summary-en", lang: "en", text: p.summary_en }) : null,
     ]);
@@ -120,7 +159,7 @@
     }
   };
 
-  const render = (projects) => {
+  const render = (projects, booth) => {
     const byTrack = { backend: [], vrchat: [], tools: [] };
     for (const p of projects) if (byTrack[p.track]) byTrack[p.track].push(p);
     // VRChat: newest BOOTH release first; items without a date go last (stable otherwise).
@@ -130,10 +169,25 @@
       const list = lists[track];
       if (!list) continue;
       const items = byTrack[track];
-      list.replaceChildren(...(items.length ? items.map(card) : [el("p", { class: "status", text: "아직 항목 없음. (No projects yet)" })]));
+      list.replaceChildren(...(items.length ? items.map((p) => card(p, booth)) : [el("p", { class: "status", text: "아직 항목 없음. (No projects yet)" })]));
+    }
+
+    // Heart total next to the VRChat heading; silently skipped without data.
+    const counts = byTrack.vrchat.map((p) => heartsFor(p, booth)).filter((n) => n != null);
+    const heading = document.getElementById("track-vrchat");
+    heading?.querySelector(".hearts-total")?.remove();
+    if (heading && counts.length) {
+      const total = heartBadge(counts.reduce((a, b) => a + b, 0), "hearts hearts-total", "BOOTH 하트 합계");
+      total.title = updatedTitle(booth);
+      heading.append(total);
     }
     lists.tools?.replaceChildren(...byTrack.tools.map(toolItem));
   };
+
+  // Optional data: any failure just means no heart counts.
+  const boothData = fetch(BOOTH_URL, { cache: "no-cache" })
+    .then((res) => (res.ok ? res.json() : null))
+    .catch(() => null);
 
   // no-cache: revalidate so JSON edits show up right after deploy.
   fetch(DATA_URL, { cache: "no-cache" })
@@ -141,9 +195,9 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
     })
-    .then((data) => {
+    .then(async (data) => {
       if (!Array.isArray(data)) throw new Error("projects.json must be an array");
-      render(data);
+      render(data, await boothData);
     })
     .catch(() => showError("프로젝트 목록 불러오기 실패. (Could not load the project list.)"));
 
