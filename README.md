@@ -13,6 +13,7 @@
 | `index.html` | 본문 (Hero, About, Projects, Skills, Experience, Certifications, Contact) |
 | `style.css` | 스타일, light/dark 토큰 |
 | `script.js` | 테마 토글, `data/projects.json` 읽어서 카드 렌더링, 축 필터 |
+| `swarm.js` / `swarm.css` | 스크롤 시 여러 커서가 블록을 "짓는" 빌드 애니메이션. JS 없음·`prefers-reduced-motion: reduce`·건너뛰기 선택(`localStorage` `swarm=off`) 시 동작 안 함. footer 버튼으로 다시 켜기 |
 | `data/projects.json` | 프로젝트 목록 |
 | `assets/` | 프로젝트 이미지 |
 

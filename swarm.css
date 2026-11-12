@@ -1,0 +1,150 @@
+/* ---------- Swarm build animation ----------
+   Every hiding rule is scoped to html.sw-on, which only an inline script in <head>
+   adds (and only when motion is allowed and the visitor has not turned it off).
+   No JS → no class → everything renders normally. */
+
+:root {
+  --sw-1: #e5484d;
+  --sw-2: #3e8ef7;
+  --sw-3: #30a46c;
+  --sw-4: #f76b15;
+  --sw-5: #8e4ec6;
+  --sw-6: #d6409f;
+}
+
+/* Hidden but still laid out: visibility/opacity keep the box, so nothing shifts. */
+html.sw-on :is(
+  #top :is(h1, .lead, .lead-en, .hero-links > li),
+  #about :is(h2, .prose > p, .facts),
+  #projects :is(h2, .section-intro, .filter, .track-title, .card-list > *, .tool-list > li),
+  #skills :is(h2, .skill-grid > div),
+  #experience :is(h2, .timeline-head, .role, .bullets),
+  #certifications :is(h2, .cert-list > li),
+  #contact :is(h2, .contact-list > li)
+):not(.sw-in) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+html.sw-on .sw-in {
+  transition: opacity 0.3s ease-out, border-color 0.2s, translate 0.2s;
+}
+
+html.sw-on body { position: relative; }
+
+/* Cursor + frame layer: covers the document, clipped so nothing can widen the page. */
+.sw-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.sw-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.sw-cursor.is-live { opacity: 1; }
+.sw-cursor svg { display: block; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.35)); }
+.sw-tag {
+  position: absolute;
+  left: 13px;
+  top: 17px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--c);
+  color: #fff;
+  font: 600 10px/1.3 var(--font-mono);
+  white-space: nowrap;
+}
+
+.sw-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px dashed var(--c);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--c) 7%, transparent);
+  transition: opacity 0.18s;
+}
+.sw-frame.is-out { opacity: 0; }
+.sw-frame i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--surface);
+  border: 1px solid var(--c);
+}
+.sw-frame i:nth-child(1) { top: -4px; left: -4px; }
+.sw-frame i:nth-child(2) { top: -4px; right: -4px; }
+.sw-frame i:nth-child(3) { bottom: -4px; left: -4px; }
+.sw-frame i:nth-child(4) { bottom: -4px; right: -4px; }
+
+/* Status pill */
+.sw-pill {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  z-index: 40;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: calc(100vw - 32px);
+  padding: 0.3rem 0.3rem 0.3rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8125rem;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+  transition: opacity 0.25s, translate 0.25s;
+}
+.sw-pill[hidden] { display: none; }
+.sw-pill.is-leaving { opacity: 0; translate: -50% 8px; }
+.sw-pill .sw-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sw-3);
+  animation: sw-pulse 1.4s ease-in-out infinite;
+}
+.sw-pill .sw-count { white-space: nowrap; font-family: var(--font-mono); }
+.sw-pill button {
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--text);
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sw-pill button:hover { border-color: var(--accent); }
+
+@keyframes sw-pulse {
+  50% { opacity: 0.35; }
+}
+
+/* Footer switch to turn the animation back on (or off) */
+.swarm-toggle {
+  font: inherit;
+  font-size: 0.8125rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+.swarm-toggle:hover { color: var(--text); }
+.swarm-toggle[hidden] { display: none; }

@@ -7,10 +7,25 @@
   <script>
     try { document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark"; } catch (e) {}
   </script>
+  <script>
+    // Build animation: hide blocks before first paint only when motion is allowed and
+    // not turned off. If swarm.js never takes over, show everything after 3.5s.
+    try {
+      if (localStorage.getItem("swarm") !== "off" && matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+        document.documentElement.classList.add("sw-on");
+        setTimeout(function () {
+          var r = document.documentElement;
+          if (!r.classList.contains("sw-ready")) r.classList.remove("sw-on");
+        }, 3500);
+      }
+    } catch (e) {}
+  </script>
   <title>김동건 · KIM DONGGUN</title>
   <meta name="description" content="백엔드 지망 개발자이자 VRChat 기믹 제작자 김동건의 포트폴리오. Portfolio of KIM DONGGUN, backend developer in training and VRChat gimmick maker.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="swarm.css">
   <script src="script.js" defer></script>
+  <script src="swarm.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문으로 건너뛰기</a>
@@ -159,6 +174,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>&copy; 2026 KIM DONGGUN (Pyrite9)</p>
+      <button type="button" class="swarm-toggle" id="swarm-toggle" hidden></button>
     </div>
   </footer>
 </body>
