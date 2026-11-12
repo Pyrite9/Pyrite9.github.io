@@ -10,7 +10,7 @@
 
 | 파일 | 내용 |
 |---|---|
-| `index.html` | 본문 (Hero, About, Projects, VRChat Gimmicks, Skills, Experience, Certifications, Contact) |
+| `index.html` | 본문 (Hero, About, Projects, VRChat Gimmicks, Working with AI, Skills, Experience, Certifications, Contact). Working with AI 내용은 HTML에 직접 작성 |
 | `style.css` | 스타일, light/dark 토큰 |
 | `script.js` | 테마 토글, `data/projects.json`·`data/booth.json` 읽어서 카드·하트 렌더링 |
 | `swarm.js` / `swarm.css` | 스크롤 시 여러 커서가 블록을 "짓는" 빌드 애니메이션. JS 없음·`prefers-reduced-motion: reduce`·건너뛰기 선택(`localStorage` `swarm=off`) 시 동작 안 함. footer 버튼으로 다시 켜기 |
@@ -83,7 +83,7 @@
 - `index.html`의 `<main>` 안 원하는 위치에 `<section class="section wrap" id="...">` + `h2` 추가, header nav에 링크 추가
 - 배경 띠(light 테마)는 섹션 순서대로 자동으로 번갈아 적용
 - 빌드 애니메이션은 모든 섹션의 `h2`, `.section-intro`, `.section-meta`, `.track-title`, `.card-list` 자식, `.tool-list` 항목을 자동 대상으로 잡음. 그 밖의 블록만 `swarm.js`의 `ITEM_SELECTOR`와 `swarm.css`의 숨김 규칙에 같이 추가
-- 좁은 화면(640px 미만)에서는 nav 앞 3개 링크만 표시(360px 미만은 2개). 중요한 섹션은 nav 앞쪽에 배치
+- 좁은 화면(640px 미만)에서는 nav 2~4번째 링크(Projects, VRChat, AI)만 표시, 360px 미만은 Projects와 AI만. 위치 기준이라 nav 순서를 바꾸면 `style.css`의 `.nav-list li` 규칙도 같이 수정
 
 ## 로컬에서 보기
 

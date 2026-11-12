@@ -12,6 +12,7 @@
     // Shared by every section, so a new section needs no change here.
     "main > .section :is(h2, .section-intro, .section-meta, .track-title, .card-list > *, .tool-list > li)",
     "#about :is(.prose > p, .facts)",
+    "#ai :is(.ai-principle, .ai-role, .ai-steps > li, .ai-case, .ai-guard, .ai-stats, .colophon)",
     "#skills .skill-grid > div",
     "#experience :is(.timeline-head, .role, .bullets)",
     "#certifications .cert-list > li",

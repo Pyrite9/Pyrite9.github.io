@@ -38,6 +38,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#vrchat">VRChat</a></li>
+          <li><a href="#ai">AI</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -109,6 +110,205 @@
         <a class="button" href="https://pyrite9.booth.pm/">BOOTH 상점 <span lang="en">Shop</span></a>
       </p>
       <div class="card-list vrchat-grid" data-list="vrchat"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
+    </section>
+
+    <section class="section wrap" id="ai" aria-labelledby="ai-title">
+      <h2 id="ai-title">Working with AI <span class="h-sub">AI와 일하는 방식</span></h2>
+      <p class="ai-principle">판단과 검증은 사람, 구현과 측정은 AI. <span lang="en">People decide and verify. AI builds and measures.</span></p>
+      <p class="section-intro">VRChat 기믹 4종을 AI 코딩 에이전트(Claude Code)와 함께 개발. 본인의 몫은 코드를 직접 타이핑한 양이 아니라 무엇을 만들지 정하고 결과를 어떻게 검증했는지. <span lang="en">I decide what to build and how to verify it; the agent writes the code.</span></p>
+
+      <div class="ai-roles">
+        <section class="ai-role is-human" aria-labelledby="ai-role-human">
+          <h3 id="ai-role-human">본인 <span class="h-sub" lang="en">Me</span></h3>
+          <ul>
+            <li>기획과 범위 결정</li>
+            <li>AI가 낸 후보 중 선택과 기각</li>
+            <li>VR·인게임 실기 검증과 버그 제보</li>
+            <li>배포·공개 결정</li>
+            <li>사용자 문의 대응</li>
+          </ul>
+        </section>
+        <section class="ai-role is-agent" aria-labelledby="ai-role-agent">
+          <h3 id="ai-role-agent">AI 에이전트 <span class="h-sub" lang="en">Agent</span></h3>
+          <ul>
+            <li>구현</li>
+            <li>측정과 렌더 비교</li>
+            <li>재현 하네스 작성</li>
+            <li>문서화</li>
+            <li>결정이 필요한 곳에는 후보와 근거 제시</li>
+          </ul>
+        </section>
+      </div>
+
+      <h3 class="track-title">작업 흐름 <span class="h-sub" lang="en">Workflow</span></h3>
+      <ol class="ai-steps">
+        <li>
+          <h4>명세와 결정 기록 <span lang="en">Spec &amp; decision log</span></h4>
+          <p>프로젝트마다 현재 상태, roadmap, 명세 문서 유지. 결정은 D번호, 위험은 R번호로 기록</p>
+          <p class="ai-proof">한 프로젝트의 명세·작업 기록 문서가 1,000~2,000줄 규모</p>
+        </li>
+        <li>
+          <h4>위임 <span lang="en">Delegate</span></h4>
+          <p>에이전트가 MCP로 Unity 에디터를 직접 조작</p>
+          <p class="ai-proof">프로젝트마다 포트를 나눠 여러 세션이 섞이지 않게 구성. 개발 프로젝트와 "받는 사람 쪽" 시험 프로젝트 분리</p>
+        </li>
+        <li>
+          <h4>다중 에이전트 검토 <span lang="en">Multi-agent review</span></h4>
+          <p>읽기 전용 에이전트 여러 개가 영역별로 검토, 결과를 교차 대조</p>
+          <p class="ai-proof">한 번의 전체 검토에 에이전트 6개. 두 에이전트가 따로 찾은 항목과 직접 확인한 항목을 구분 표시</p>
+        </li>
+        <li>
+          <h4>근거 수준 표시와 기준선 대조 <span lang="en">Evidence levels &amp; baselines</span></h4>
+          <p>발견마다 심각도(S1~S5)와 근거 수준(재현됨 / 코드 추론 / 가설) 표기</p>
+          <p class="ai-proof">수정 전후 빌드 결과를 golden 해시로 대조해 바이트 단위로 같은지 확인. 확인하지 못한 것은 "미확인"으로 그대로 기록</p>
+        </li>
+        <li>
+          <h4>인게임 실기 판정 <span lang="en">In-game verdict</span></h4>
+          <p>여러 시험 아바타에 붙여 비공개로 올린 뒤 VR·인게임에서 본인이 직접 판정</p>
+          <p class="ai-proof">에디터에서 통과해도 인게임에서 불합격이면 불합격</p>
+        </li>
+      </ol>
+
+      <h3 class="track-title">사례 <span class="h-sub" lang="en">Case studies</span></h3>
+      <div class="ai-cases">
+        <article class="ai-case">
+          <p class="ai-case-tag">Drink Can</p>
+          <h4>깨진 배포 파일 <span lang="en">The broken package</span></h4>
+          <dl>
+            <div>
+              <dt>무슨 일 <span lang="en">What happened</span></dt>
+              <dd>
+                <ul>
+                  <li>문서 표기 한 줄을 고치려고 Unity 없이 스크립트로 패키지를 다시 묶음</li>
+                  <li>검증은 바이트 비교와 해시뿐, 실제 임포트는 해 보지 않음</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
+              <dd>
+                <ul>
+                  <li>받는 사람의 제보("더블클릭해도 아무 일도 안 일어남")로 발견. 깨진 파일이 572회 다운로드된 뒤</li>
+                  <li>압축 형식 2종 × 헤더 이름 2종을 대조해 원인 분리(0 / 0 / 126 / 126개 임포트)</li>
+                  <li>원인: 압축 헤더의 파일 이름에 따라 Unity가 오류 없이 건너뜀</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
+              <dd>
+                <ul>
+                  <li>제보 당일 수정판 배포와 공지</li>
+                  <li>새 규칙: 올릴 파일은 직접 풀어 빈 프로젝트에 임포트하고 파일 수까지 확인한 뒤에만 업로드</li>
+                  <li>이 절차를 뒤의 모든 프로젝트에 적용</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="ai-case">
+          <p class="ai-case-tag">Sleeve Roll</p>
+          <h4>"재현 안 됨" 보고가 틀림 <span lang="en">A wrong "cannot reproduce"</span></h4>
+          <dl>
+            <div>
+              <dt>무슨 일 <span lang="en">What happened</span></dt>
+              <dd>
+                <ul>
+                  <li>에이전트가 인게임 실패를 "재현 안 됨"으로 보고</li>
+                  <li>본인이 인게임 스크린샷으로 반박. 에이전트가 이미 찍어 둔 비교 렌더의 틈을 "작은 틈"으로 넘겼던 것으로 확인</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
+              <dd>
+                <ul>
+                  <li>이후 수정도 인게임에서 연속 실패</li>
+                  <li>원인: 확인 렌더의 거리가 멀어 결함이 보이지 않았음</li>
+                  <li>근접 렌더와 깊이 측정을 넣자 재현됨</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
+              <dd>
+                <ul>
+                  <li>본인이 방향 전환: 옷마다 대응하지 않고 일반 알고리즘으로</li>
+                  <li>만든 쪽과 다른 평가 에이전트가 판정. 평가 전용 데이터는 만드는 쪽에 넘기지 않음. 합격 기준은 낮추지 않음</li>
+                  <li>6세대에서 멈추도록 본인이 결정. 자체 기준 불합격이 남은 상태였고, 인게임 판정에서 양호로 확인</li>
+                  <li>남은 불합격과 위험은 문서에 그대로 남김</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="ai-case">
+          <p class="ai-case-tag">Drink Can</p>
+          <h4>수치는 개선, 체감은 기각 <span lang="en">Better numbers, rejected in play</span></h4>
+          <dl>
+            <div>
+              <dt>무슨 일 <span lang="en">What happened</span></dt>
+              <dd>
+                <ul>
+                  <li>캔 교체 순간의 2프레임 공백</li>
+                  <li>에이전트가 없애는 방식을 28개 조합으로 측정해 공백 0/28 달성</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
+              <dd>
+                <ul>
+                  <li>본인 인게임 판정: 깜빡임보다 두 캔이 겹쳐 보이는 쪽이 더 어색함</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
+              <dd>
+                <ul>
+                  <li>되돌림</li>
+                  <li>남은 원칙: 수치 개선 ≠ 체감 개선. 최종 판정은 실기</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+
+      <div class="ai-bottom">
+        <section class="ai-guard" aria-labelledby="ai-guard-title">
+          <h3 id="ai-guard-title" class="track-title small">가드레일 <span class="h-sub" lang="en">Guardrails</span></h3>
+          <ul class="bullets">
+            <li>에이전트 권한 설정: <code>git push</code>는 매번 사람 확인. force push·amend·rebase·<code>reset --hard</code>·재귀 삭제는 차단</li>
+            <li>파일은 영구 삭제하지 않고 별도 폴더로 이동</li>
+            <li>공개·업로드·배포 같은 외부 작업은 본인 동의 후</li>
+            <li>유료 아바타에서 나온 데이터(메시, 셰이프키 값, 텍스처)는 배포물에 넣지 않음</li>
+          </ul>
+        </section>
+        <section class="ai-stats" aria-labelledby="ai-stats-title">
+          <h3 id="ai-stats-title" class="track-title small">숫자 <span class="h-sub" lang="en">Numbers</span></h3>
+          <p class="ai-stats-label">commit 수 <span lang="en">Commits</span></p>
+          <ul class="ai-bars">
+            <li style="--v: 235"><span>Pulse Watch</span><b>235</b></li>
+            <li style="--v: 206"><span>Sleeve Roll</span><b>206</b></li>
+            <li style="--v: 127"><span>Drink Can</span><b>127</b></li>
+            <li style="--v: 71"><span>Wheelchair</span><b>71</b></li>
+          </ul>
+          <p class="ai-note">개발 repo 기준, 거의 전부 AI co-author 표기</p>
+          <p class="ai-stats-label">Drink Can 한 프로젝트 <span lang="en">One project</span></p>
+          <dl class="ai-tiles">
+            <div><dt>C#</dt><dd>약 7,000줄</dd></div>
+            <div><dt>Python 도구</dt><dd>약 1,760줄</dd></div>
+            <div><dt>작업 기록</dt><dd>103절</dd></div>
+            <div><dt>시작 → 첫 공개</dt><dd>4일</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <p class="colophon">이 사이트도 같은 방식으로 제작. 구성·문구·방향 수정은 본인, 구현과 검증은 Claude Code. <span lang="en">This site was built the same way.</span> <a href="https://github.com/Pyrite9/Pyrite9.github.io/commits/main">commit 기록 보기 <span lang="en">Commit history</span></a></p>
     </section>
 
     <section class="section wrap" id="skills" aria-labelledby="skills-title">
