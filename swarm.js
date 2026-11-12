@@ -9,12 +9,13 @@
 
   const ITEM_SELECTOR = [
     "#top :is(h1, .lead, .lead-en, .hero-links > li)",
-    "#about :is(h2, .prose > p, .facts)",
-    "#projects :is(h2, .section-intro, .filter, .track-title, .card-list > *, .tool-list > li)",
-    "#skills :is(h2, .skill-grid > div)",
-    "#experience :is(h2, .timeline-head, .role, .bullets)",
-    "#certifications :is(h2, .cert-list > li)",
-    "#contact :is(h2, .contact-list > li)",
+    // Shared by every section, so a new section needs no change here.
+    "main > .section :is(h2, .section-intro, .section-meta, .track-title, .card-list > *, .tool-list > li)",
+    "#about :is(.prose > p, .facts)",
+    "#skills .skill-grid > div",
+    "#experience :is(.timeline-head, .role, .bullets)",
+    "#certifications .cert-list > li",
+    "#contact .contact-list > li",
   ].join(", ");
 
   const COLORS = ["var(--sw-1)", "var(--sw-2)", "var(--sw-3)", "var(--sw-4)", "var(--sw-5)", "var(--sw-6)"];

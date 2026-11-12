@@ -96,7 +96,7 @@
 
   const card = (p, booth) => {
     const hasImage = p.image && p.image.src;
-    const article = el("article", { class: hasImage ? "card" : "card compact" });
+    const article = el("article", { class: ["card", hasImage ? "" : "compact", p.featured ? "featured" : ""].filter(Boolean).join(" ") });
 
     if (hasImage) {
       const img = el("img", {
@@ -172,14 +172,14 @@
       list.replaceChildren(...(items.length ? items.map((p) => card(p, booth)) : [el("p", { class: "status", text: "아직 항목 없음. (No projects yet)" })]));
     }
 
-    // Heart total next to the VRChat heading; silently skipped without data.
+    // Heart total in the VRChat section header; silently skipped without data.
     const counts = byTrack.vrchat.map((p) => heartsFor(p, booth)).filter((n) => n != null);
-    const heading = document.getElementById("track-vrchat");
-    heading?.querySelector(".hearts-total")?.remove();
-    if (heading && counts.length) {
+    const meta = document.querySelector("[data-hearts-total]");
+    meta?.querySelector(".hearts-total")?.remove();
+    if (meta && counts.length) {
       const total = heartBadge(counts.reduce((a, b) => a + b, 0), "hearts hearts-total", "BOOTH 하트 합계");
       total.title = updatedTitle(booth);
-      heading.append(total);
+      meta.prepend(total);
     }
     lists.tools?.replaceChildren(...byTrack.tools.map(toolItem));
   };
@@ -200,18 +200,4 @@
       render(data, await boothData);
     })
     .catch(() => showError("프로젝트 목록 불러오기 실패. (Could not load the project list.)"));
-
-  /* ---------- Track filter ---------- */
-  const tracks = document.getElementById("tracks");
-  const buttons = document.querySelectorAll(".filter button");
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const value = btn.dataset.filter;
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-      tracks.dataset.filter = value;
-      tracks.classList.remove("is-switching");
-      void tracks.offsetWidth; // restart animation
-      tracks.classList.add("is-switching");
-    });
-  });
 })();

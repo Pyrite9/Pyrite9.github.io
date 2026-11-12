@@ -10,9 +10,9 @@
 
 | 파일 | 내용 |
 |---|---|
-| `index.html` | 본문 (Hero, About, Projects, Skills, Experience, Certifications, Contact) |
+| `index.html` | 본문 (Hero, About, Projects, VRChat Gimmicks, Skills, Experience, Certifications, Contact) |
 | `style.css` | 스타일, light/dark 토큰 |
-| `script.js` | 테마 토글, `data/projects.json` 읽어서 카드 렌더링, 축 필터 |
+| `script.js` | 테마 토글, `data/projects.json`·`data/booth.json` 읽어서 카드·하트 렌더링 |
 | `swarm.js` / `swarm.css` | 스크롤 시 여러 커서가 블록을 "짓는" 빌드 애니메이션. JS 없음·`prefers-reduced-motion: reduce`·건너뛰기 선택(`localStorage` `swarm=off`) 시 동작 안 함. footer 버튼으로 다시 켜기 |
 | `data/projects.json` | 프로젝트 목록 |
 | `data/booth.json` | BOOTH 하트(위시리스트) 수. GitHub Actions가 갱신, 손으로 고치지 않음 |
@@ -47,7 +47,8 @@
 | 필드 | 필수 | 설명 |
 |---|---|---|
 | `id` | O | 겹치지 않는 식별자 |
-| `track` | O | `backend`, `vrchat`, `tools` 중 하나. `tools`는 카드가 아니라 아래쪽 짧은 목록으로 표시 |
+| `track` | O | 표시 위치. `backend` → Projects 섹션 카드, `tools` → Projects 아래쪽 짧은 목록, `vrchat` → VRChat Gimmicks 섹션 카드 |
+| `featured` | | `true`면 대표 프로젝트로 크게 표시(가로 전체, 넓은 화면에서 이미지·글 좌우 배치). 이미지 있는 항목에 권장 |
 | `title` | O | 카드 제목 |
 | `published_at` | | BOOTH 공개일 `YYYY-MM-DD`. `vrchat` 축은 이 값의 최신순으로 정렬(값 없으면 뒤로). 화면에는 표시 안 함 |
 | `summary_ko` / `summary_en` | | 한국어 설명 / 영어 보조 줄 |
@@ -71,11 +72,18 @@
   - 실패, 비정상 응답, 숫자가 아닌 값인 상품은 기존 값 유지
   - 전부 실패하면 파일을 건드리지 않고 workflow 실패로 종료
   - 값 변화가 없으면 commit 없음(`updated_at`도 값이 바뀔 때만 갱신)
-- 화면: VRChat 카드마다 하트 수, VRChat 제목 옆에 합계. 마지막 갱신 시각은 마우스를 올리면 보이는 `title`. `booth.json`이 없거나 읽지 못하면 하트 표시만 빠짐
+- 화면: VRChat 카드마다 하트 수, VRChat Gimmicks 섹션 머리(BOOTH 상점 링크 옆)에 합계. 마지막 갱신 시각은 마우스를 올리면 보이는 `title`. `booth.json`이 없거나 읽지 못하면 하트 표시만 빠짐
 - 수동 실행
   - GitHub: repo의 Actions 탭 → "Update BOOTH hearts" → Run workflow
   - 로컬: 이 폴더에서 `node scripts/update-booth.mjs` (테스트용 경로 지정: `--projects <파일> --out <파일>`)
 - 주의: public repo에서 60일간 활동(commit 등)이 없으면 GitHub가 schedule workflow를 자동으로 끔. 그때는 Actions 탭에서 다시 Enable
+
+## 섹션 추가
+
+- `index.html`의 `<main>` 안 원하는 위치에 `<section class="section wrap" id="...">` + `h2` 추가, header nav에 링크 추가
+- 배경 띠(light 테마)는 섹션 순서대로 자동으로 번갈아 적용
+- 빌드 애니메이션은 모든 섹션의 `h2`, `.section-intro`, `.section-meta`, `.track-title`, `.card-list` 자식, `.tool-list` 항목을 자동 대상으로 잡음. 그 밖의 블록만 `swarm.js`의 `ITEM_SELECTOR`와 `swarm.css`의 숨김 규칙에 같이 추가
+- 좁은 화면(640px 미만)에서는 nav 앞 3개 링크만 표시(360px 미만은 2개). 중요한 섹션은 nav 앞쪽에 배치
 
 ## 로컬에서 보기
 

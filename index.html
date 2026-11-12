@@ -37,6 +37,7 @@
         <ul class="nav-list">
           <li><a href="#about">About</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#vrchat">VRChat</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -85,29 +86,29 @@
 
     <section class="section wrap" id="projects" aria-labelledby="projects-title">
       <h2 id="projects-title">Projects <span class="h-sub">프로젝트</span></h2>
-      <p class="section-intro">두 갈래 작업: 백엔드·웹 서비스와 VRChat 기믹. <span lang="en">Two tracks: backend/web and VRChat gimmicks.</span></p>
+      <p class="section-intro">백엔드·웹 서비스 작업. <span lang="en">Backend and web work.</span></p>
 
-      <div class="filter" role="group" aria-label="프로젝트 축 선택 (Filter projects)">
-        <button type="button" data-filter="all" aria-pressed="true">전체 <span lang="en">All</span></button>
-        <button type="button" data-filter="backend" aria-pressed="false">Backend / Web</button>
-        <button type="button" data-filter="vrchat" aria-pressed="false">VRChat</button>
-      </div>
-
-      <div class="tracks" id="tracks" data-filter="all">
-        <section class="track" data-track="backend" aria-labelledby="track-backend">
-          <h3 id="track-backend" class="track-title">Backend / Web <span class="h-sub">백엔드 · 웹</span></h3>
-          <div class="card-list" data-list="backend"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
-        </section>
-        <section class="track" data-track="vrchat" aria-labelledby="track-vrchat">
-          <h3 id="track-vrchat" class="track-title">VRChat Gimmicks <span class="h-sub">VRChat 기믹</span></h3>
-          <div class="card-list" data-list="vrchat"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
-        </section>
-      </div>
+      <section class="track" data-track="backend" aria-labelledby="track-backend">
+        <h3 id="track-backend" class="track-title">Backend / Web <span class="h-sub">백엔드 · 웹</span></h3>
+        <div class="card-list backend-grid" data-list="backend"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
+      </section>
 
       <section class="tools" aria-labelledby="track-tools">
         <h3 id="track-tools" class="track-title small">Tools &amp; etc. <span class="h-sub">그 밖의 도구</span></h3>
         <ul class="tool-list" data-list="tools"></ul>
       </section>
+    </section>
+
+    <!-- Adding a section anywhere in <main>: <section class="section wrap" id="..."> with an
+         h2 (optionally .section-intro, .section-meta, .card-list), plus a nav link.
+         Background bands alternate on their own and the build animation picks it up. -->
+    <section class="section wrap" id="vrchat" aria-labelledby="vrchat-title">
+      <h2 id="vrchat-title">VRChat Gimmicks <span class="h-sub">VRChat 기믹</span></h2>
+      <p class="section-intro">VRChat 아바타용 기믹 무료 배포. Modular Avatar 기반, 문서는 일본어·영어·한국어 3개 국어. <span lang="en">Free avatar gimmicks built on Modular Avatar, documented in Japanese, English and Korean.</span></p>
+      <p class="section-meta" data-hearts-total>
+        <a class="button" href="https://pyrite9.booth.pm/">BOOTH 상점 <span lang="en">Shop</span></a>
+      </p>
+      <div class="card-list vrchat-grid" data-list="vrchat"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
     </section>
 
     <section class="section wrap" id="skills" aria-labelledby="skills-title">

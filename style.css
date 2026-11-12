@@ -221,7 +221,13 @@ nav { margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 }
 .nav-list a:hover { color: var(--text); background: var(--chip); }
 
+/* Narrow screens: keep the first three links; the rest are reachable by scrolling the page. */
 @media (max-width: 639px) {
+  .nav-list { gap: 0; }
+  .nav-list a { padding-inline: 0.45rem; }
+  .nav-list li:nth-child(n+4) { display: none; }
+}
+@media (max-width: 359px) {
   .nav-list li:nth-child(n+3) { display: none; }
 }
 
@@ -330,6 +336,7 @@ h1 {
   color: var(--muted);
   margin-left: 0.35em;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 .section-intro { margin: -0.5rem 0 1.5rem; color: var(--muted); }
 
@@ -355,41 +362,13 @@ h1 {
 .facts dt [lang="en"] { opacity: 0.8; }
 .facts dd { margin: 0; font-weight: 600; }
 
-/* ---------- Projects ---------- */
-.filter {
-  display: inline-flex;
+/* ---------- Projects / VRChat ---------- */
+.section-meta {
+  display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-  margin-bottom: 1.75rem;
-}
-.filter button {
-  font: inherit;
-  font-size: 0.9375rem;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
-}
-.filter button:hover { color: var(--text); }
-.filter button[aria-pressed="true"] { background: var(--fill); color: var(--fill-text); }
-
-.tracks {
-  display: grid;
-  gap: 2.5rem;
-  @media (min-width: 860px) { grid-template-columns: 1fr 1fr; gap: 2rem; }
-}
-.tracks[data-filter="backend"] .track[data-track="vrchat"],
-.tracks[data-filter="vrchat"] .track[data-track="backend"] { display: none; }
-.tracks:not([data-filter="all"]) { grid-template-columns: 1fr; }
-.tracks:not([data-filter="all"]) .card-list {
-  @media (min-width: 860px) { grid-template-columns: 1fr 1fr; }
+  align-items: center;
+  gap: 0.75rem;
+  margin: -0.5rem 0 1.75rem;
 }
 
 .track-title {
@@ -401,6 +380,25 @@ h1 {
 .track-title.small { font-size: 1rem; border-bottom-width: 1px; border-color: var(--line); }
 
 .card-list { display: grid; gap: 1rem; }
+.backend-grid,
+.vrchat-grid {
+  @media (min-width: 700px) { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+}
+.vrchat-grid { gap: 1.25rem; }
+
+/* Featured project: full width; image beside the text on wide screens. */
+.card.featured { grid-column: 1 / -1; }
+.card.featured h4 { font-size: 1.375rem; }
+@media (min-width: 860px) {
+  .card.featured { flex-direction: row; }
+  .card.featured .card-media {
+    flex: 0 0 52%;
+    aspect-ratio: auto;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .card.featured .card-body { padding: 1.5rem 1.75rem; }
+}
 
 .card {
   display: flex;
@@ -520,14 +518,9 @@ h1 {
 @media (prefers-reduced-motion: no-preference) {
   .card { transition: border-color 0.2s, translate 0.2s; }
   .card:hover { border-color: var(--accent); translate: 0 -2px; }
-  .tracks.is-switching .track { animation: fade-in 0.25s ease-out; }
 }
 .card:hover { border-color: var(--accent); }
 
-@keyframes fade-in {
-  from { opacity: 0; translate: 0 6px; }
-  to { opacity: 1; translate: 0 0; }
-}
 
 /* ---------- Light theme depth ----------
    Colors come from tokens whose dark values are transparent or equal to the old
@@ -581,7 +574,6 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
 
 .card,
 .facts,
-.filter,
 .theme-toggle,
 .button:not(.primary) {
   box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
@@ -623,8 +615,7 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
 }
 .hearts svg { color: var(--heart); flex: none; }
 .hearts-total {
-  margin-left: 0.6rem;
-  vertical-align: 0.15em;
-  letter-spacing: 0;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9375rem;
 }
 

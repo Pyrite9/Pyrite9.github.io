@@ -3,6 +3,7 @@
     "id": "footprint-demo",
     "track": "backend",
     "title": "발자국 footprint",
+    "featured": true,
     "summary_ko": "조별과제에서 누가 언제 무엇을 했는지 기록으로 남기고, 동료평가 때 그 기록을 근거로 보여 주는 서비스. 원칙은 \"판단은 사람, 시스템은 근거만\" — 점수·순위·진척률 계산 없음.",
     "summary_en": "Team-project activity log and peer-review support service. The system shows evidence; people make the judgement.",
     "stack": ["Spring Boot 3", "JPA", "Spring Security (JWT)", "PostgreSQL", "Docker", "React"],
