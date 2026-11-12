@@ -642,7 +642,6 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
 
 .ai-role,
 .ai-steps > li,
-.ai-case,
 .ai-tiles div {
   box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
 }
@@ -728,23 +727,149 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
   font-size: 0.875rem;
 }
 
-/* Case studies */
-.ai-cases {
+/* Generational search */
+.ai-gen { margin-bottom: 3rem; }
+.gen-lead { margin: 0 0 1.75rem; max-width: 46em; }
+.gen-lead [lang="en"] { display: block; margin-top: 0.2rem; color: var(--muted); font-size: 0.9375rem; }
+
+/* Cycle diagram: people sit outside the agents' loop */
+.gen-cycle {
+  margin: 0 0 2.5rem;
   display: grid;
-  gap: 1.25rem;
-  margin-bottom: 3rem;
-  @media (min-width: 1000px) { grid-template-columns: repeat(3, 1fr); }
+  justify-items: center;
+  gap: 1.5rem;
 }
-.ai-case {
+.gen-human {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  padding: 1.1rem 1.25rem 1.25rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 0.6rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
   background: var(--surface);
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
 }
-.ai-case-tag {
-  align-self: flex-start;
+.gen-who {
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--fill-text);
+  font: 700 0.75rem/1.6 var(--font-mono);
+}
+.gen-who [lang="en"] { font-weight: 500; }
+.gen-human.is-in::after,
+.gen-human.is-out::before {
+  content: "↓";
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+.gen-human.is-in::after { top: 100%; }
+.gen-human.is-out::before { bottom: 100%; }
+
+.gen-zone {
+  width: 100%;
+  padding: 0.9rem 1rem 1rem;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+}
+.gen-zone-label {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font: 600 0.75rem/1.4 var(--font-mono);
+  text-align: center;
+}
+.gen-loop {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 20rem;
+  display: grid;
+  gap: 1.5rem;
+}
+.gen-loop li {
+  position: relative;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  text-align: center;
+  box-shadow: 0 1px 2px var(--shadow-1);
+}
+.gen-loop b { display: block; font-size: 0.9375rem; }
+.gen-loop [lang="en"] { display: block; font-size: 0.75rem; color: var(--muted); line-height: 1.35; }
+.gen-loop li:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+.gen-return {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  color: var(--accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.gen-return::before { content: "↺ "; }
+
+@media (min-width: 760px) {
+  .gen-loop {
+    max-width: none;
+    grid-template-columns: repeat(5, 1fr);
+    padding-bottom: 1.6rem;
+  }
+  .gen-loop li { display: grid; align-content: center; }
+  .gen-loop li:not(:last-child)::after {
+    content: "→";
+    top: 50%;
+    left: 100%;
+    width: 1.5rem;
+    translate: 0 -50%;
+    text-align: center;
+  }
+  /* Return path: from the last step back to the first, under the row */
+  .gen-loop::after {
+    content: "";
+    position: absolute;
+    left: calc((100% - 6rem) / 10);
+    right: calc((100% - 6rem) / 10);
+    bottom: 0;
+    height: 1.1rem;
+    border: 2px solid var(--accent);
+    border-top: 0;
+    border-radius: 0 0 10px 10px;
+  }
+  .gen-loop::before {
+    content: "";
+    position: absolute;
+    left: calc((100% - 6rem) / 10);
+    bottom: 1.1rem;
+    translate: calc(-50% + 1px) 0;
+    border: 6px solid transparent;
+    border-bottom: 8px solid var(--accent);
+    border-top: 0;
+  }
+  .gen-return { margin-top: 0.4rem; }
+}
+
+/* The real run */
+.gen-record-tag {
+  display: inline-block;
   margin: 0 0 0.5rem;
   padding: 0.1rem 0.6rem;
   border-radius: 999px;
@@ -752,21 +877,189 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
   box-shadow: inset 0 0 0 1px var(--ring);
   font: 600 0.75rem/1.6 var(--font-mono);
 }
-.ai-case h4 { margin: 0 0 0.75rem; font-size: 1.125rem; line-height: 1.35; }
-.ai-case h4 [lang="en"] {
-  display: block;
+.gen-record h4 { margin: 0 0 0.75rem; font-size: 1.25rem; line-height: 1.35; }
+.gen-record h4 [lang="en"] { display: block; font-size: 0.8125rem; font-weight: 500; color: var(--muted); }
+.gen-why { margin: 0 0 1.25rem; max-width: 46em; }
+.gen-end { margin: 1.25rem 0 0; max-width: 46em; }
+:is(.gen-why, .gen-end, .gen-block, .gen-limit) > b:first-child {
+  margin-right: 0.5em;
+  color: var(--accent);
   font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--muted);
 }
-.ai-case dl { margin: 0; display: grid; gap: 0.75rem; }
-.ai-case dl > div { padding-left: 0.75rem; border-left: 2px solid var(--line); }
-.ai-case dl > div:last-child { border-left-color: var(--accent); }
-.ai-case dt { font-size: 0.8125rem; font-weight: 700; color: var(--accent); }
-.ai-case dt [lang="en"] { font-weight: 500; color: var(--muted); margin-left: 0.25em; }
-.ai-case dd { margin: 0.2rem 0 0; }
-.ai-case dd ul { margin: 0; padding-left: 1rem; font-size: 0.9375rem; }
-.ai-case dd li { margin: 0.15rem 0; }
+
+/* Generation stepper. Without JS: a plain list of every generation. */
+.gen-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  @media (min-width: 640px) { grid-template-columns: 1fr 1fr; }
+  @media (min-width: 1000px) { grid-template-columns: repeat(3, 1fr); }
+}
+.gen-list > li {
+  padding: 0.9rem 1.1rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
+}
+.gen-list > li:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.gen-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem 0.75rem;
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+}
+.gen-fail {
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px currentColor;
+  color: var(--heart);
+  font: 600 0.75rem/1.6 var(--font-mono);
+}
+.gen-block { margin: 0; }
+.gen-mark {
+  display: inline-block;
+  margin: 0.6rem 0 0;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--fill-text);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+/* With JS: a 1-6 tab row; the chosen generation shows below. */
+.gen-stepper.is-enhanced .gen-list { grid-template-columns: 1fr; }
+.gen-stepper.is-enhanced .gen-list > li { padding: 1.1rem 1.25rem; }
+.gen-stepper.is-enhanced .gen-name { font-size: 1.0625rem; }
+.gen-tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 0 1rem;
+}
+.gen-tabs::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: calc(100% / 12);
+  right: calc(100% / 12);
+  height: 2px;
+  background: var(--line);
+}
+.gen-tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+.gen-tab-dot {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font: 700 0.875rem/1 var(--font-mono);
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.gen-tab:hover .gen-tab-dot { border-color: var(--accent); }
+.gen-tab[aria-selected="true"] { color: var(--text); font-weight: 700; }
+.gen-tab[aria-selected="true"] .gen-tab-dot { background: var(--fill); border-color: var(--fill); color: var(--fill-text); }
+.gen-tab:focus-visible { outline: none; }
+.gen-tab:focus-visible .gen-tab-dot { outline: 2px solid var(--accent); outline-offset: 3px; }
+.gen-tab-mark {
+  padding: 0 0.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.gen-figures {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  @media (min-width: 860px) { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+.gen-deltas {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.6rem;
+}
+.gen-deltas div {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
+}
+.gen-deltas dt { font-size: 0.8125rem; color: var(--muted); }
+.gen-deltas dd { margin: 0; font: 500 1rem/1.5 var(--font-mono); white-space: nowrap; }
+.gen-deltas dd b { font-size: 1.125rem; }
+.gen-deltas s { color: var(--muted); }
+
+/* Rules: what keeps the search honest */
+.ai-gen .gen-rules-title { margin: 2.5rem 0 0.6rem; }
+.gen-rules {
+  list-style: none;
+  counter-reset: gen-rule;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  @media (min-width: 700px) { grid-template-columns: 1fr 1fr; }
+}
+.gen-rules li {
+  counter-increment: gen-rule;
+  position: relative;
+  padding: 1rem 1.1rem 1rem 3.1rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--fill);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
+  font-size: 0.9375rem;
+}
+.gen-rules li::before {
+  content: counter(gen-rule);
+  position: absolute;
+  left: 1rem;
+  top: 0.85rem;
+  color: var(--accent);
+  font: 700 1.375rem/1.2 var(--font-mono);
+}
+.gen-rules b { display: block; font-size: 1.0625rem; margin-bottom: 0.15rem; }
+.gen-rules [lang="en"] { display: block; margin-top: 0.3rem; color: var(--muted); font-size: 0.8125rem; }
+
+.gen-more {
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.gen-more p { margin: 0 0 0.3rem; }
+.gen-more b { color: var(--text); }
+.gen-more ul { margin: 0 0 0.75rem; padding-left: 1.1rem; }
+.gen-more .gen-limit { margin: 0; }
 
 /* Guardrails + numbers */
 .ai-bottom {
@@ -775,7 +1068,7 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
   @media (min-width: 860px) { grid-template-columns: 1fr 1fr; gap: 3rem; }
 }
 .ai-guard .bullets li { margin: 0.4rem 0; }
-.ai-guard code, .ai-case code {
+.ai-guard code {
   font: 0.875em var(--font-mono);
   padding: 0.05em 0.35em;
   border-radius: 4px;

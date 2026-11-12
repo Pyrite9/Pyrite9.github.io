@@ -201,3 +201,71 @@
     })
     .catch(() => showError("프로젝트 목록 불러오기 실패. (Could not load the project list.)"));
 })();
+
+/* ---------- Generation stepper (Working with AI) ----------
+   Without JS the generations stay a plain list. With JS they become tabs:
+   click, or move focus with arrow keys / Home / End, to show one generation. */
+(() => {
+  const stepper = document.querySelector("[data-gen-stepper]");
+  const panels = stepper ? [...stepper.querySelectorAll(".gen-list > li")] : [];
+  if (!panels.length) return;
+
+  const tablist = document.createElement("div");
+  tablist.className = "gen-tabs";
+  tablist.setAttribute("role", "tablist");
+  tablist.setAttribute("aria-label", "세대 선택 (Choose a generation)");
+
+  const tabs = panels.map((panel) => {
+    const tab = document.createElement("button");
+    tab.type = "button";
+    tab.className = "gen-tab";
+    tab.id = `${panel.id}-tab`;
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-controls", panel.id);
+    const dot = document.createElement("span");
+    dot.className = "gen-tab-dot";
+    dot.setAttribute("aria-hidden", "true");
+    dot.textContent = panel.dataset.gen;
+    const label = document.createElement("span");
+    label.textContent = `${panel.dataset.gen}세대`;
+    tab.append(dot, label);
+    if (panel.dataset.mark) {
+      const mark = document.createElement("span");
+      mark.className = "gen-tab-mark";
+      mark.textContent = panel.dataset.mark;
+      tab.append(mark);
+    }
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", tab.id);
+    panel.tabIndex = 0;
+    tablist.append(tab);
+    return tab;
+  });
+
+  const select = (index, focus) => {
+    tabs.forEach((tab, i) => {
+      const on = i === index;
+      tab.setAttribute("aria-selected", String(on));
+      tab.tabIndex = on ? 0 : -1;
+      panels[i].hidden = !on;
+    });
+    if (focus) tabs[index].focus();
+  };
+
+  tablist.addEventListener("click", (event) => {
+    const i = tabs.indexOf(event.target.closest(".gen-tab"));
+    if (i >= 0) select(i, false);
+  });
+  tablist.addEventListener("keydown", (event) => {
+    const current = tabs.indexOf(document.activeElement);
+    if (current < 0) return;
+    const next = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    select((next + tabs.length) % tabs.length, true);
+  });
+
+  stepper.prepend(tablist);
+  stepper.classList.add("is-enhanced");
+  select(0, false);
+})();

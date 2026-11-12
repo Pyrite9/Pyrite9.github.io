@@ -17,7 +17,7 @@ html.sw-on :is(
   #top :is(h1, .lead, .lead-en, .hero-links > li),
   main > .section :is(h2, .section-intro, .section-meta, .track-title, .card-list > *, .tool-list > li),
   #about :is(.prose > p, .facts),
-  #ai :is(.ai-principle, .ai-role, .ai-steps > li, .ai-case, .ai-guard, .ai-stats, .colophon),
+  #ai :is(.ai-principle, .ai-role, .ai-steps > li, .gen-lead, .gen-cycle, .gen-record, .gen-rules-title, .gen-rules > li, .gen-more, .ai-guard, .ai-stats, .colophon),
   #skills .skill-grid > div,
   #experience :is(.timeline-head, .role, .bullets),
   #certifications .cert-list > li,

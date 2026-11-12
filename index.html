@@ -169,114 +169,102 @@
         </li>
       </ol>
 
-      <h3 class="track-title">사례 <span class="h-sub" lang="en">Case studies</span></h3>
-      <div class="ai-cases">
-        <article class="ai-case">
-          <p class="ai-case-tag">Drink Can</p>
-          <h4>깨진 배포 파일 <span lang="en">The broken package</span></h4>
-          <dl>
-            <div>
-              <dt>무슨 일 <span lang="en">What happened</span></dt>
-              <dd>
-                <ul>
-                  <li>문서 표기 한 줄을 고치려고 Unity 없이 스크립트로 패키지를 다시 묶음</li>
-                  <li>검증은 바이트 비교와 해시뿐, 실제 임포트는 해 보지 않음</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
-              <dd>
-                <ul>
-                  <li>받는 사람의 제보("더블클릭해도 아무 일도 안 일어남")로 발견. 깨진 파일이 572회 다운로드된 뒤</li>
-                  <li>압축 형식 2종 × 헤더 이름 2종을 대조해 원인 분리(0 / 0 / 126 / 126개 임포트)</li>
-                  <li>원인: 압축 헤더의 파일 이름에 따라 Unity가 오류 없이 건너뜀</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
-              <dd>
-                <ul>
-                  <li>제보 당일 수정판 배포와 공지</li>
-                  <li>새 규칙: 올릴 파일은 직접 풀어 빈 프로젝트에 임포트하고 파일 수까지 확인한 뒤에만 업로드</li>
-                  <li>이 절차를 뒤의 모든 프로젝트에 적용</li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </article>
+      <section class="ai-gen" aria-labelledby="ai-gen-title">
+        <h3 id="ai-gen-title" class="track-title">세대 반복 탐색 <span class="h-sub" lang="en">Generational search</span></h3>
+        <p class="gen-lead">에이전트가 후보 알고리즘을 만들고, 다른 에이전트가 평가하고, 불합격 사유로 다음 세대를 만듦. 멈출 시점과 최종 판정은 사람. <span lang="en">Agents build and grade candidates generation by generation; a person decides when to stop and gives the final verdict.</span></p>
 
-        <article class="ai-case">
-          <p class="ai-case-tag">Sleeve Roll</p>
-          <h4>"재현 안 됨" 보고가 틀림 <span lang="en">A wrong "cannot reproduce"</span></h4>
-          <dl>
-            <div>
-              <dt>무슨 일 <span lang="en">What happened</span></dt>
-              <dd>
-                <ul>
-                  <li>에이전트가 인게임 실패를 "재현 안 됨"으로 보고</li>
-                  <li>본인이 인게임 스크린샷으로 반박. 에이전트가 이미 찍어 둔 비교 렌더의 틈을 "작은 틈"으로 넘겼던 것으로 확인</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
-              <dd>
-                <ul>
-                  <li>이후 수정도 인게임에서 연속 실패</li>
-                  <li>원인: 확인 렌더의 거리가 멀어 결함이 보이지 않았음</li>
-                  <li>근접 렌더와 깊이 측정을 넣자 재현됨</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
-              <dd>
-                <ul>
-                  <li>본인이 방향 전환: 옷마다 대응하지 않고 일반 알고리즘으로</li>
-                  <li>만든 쪽과 다른 평가 에이전트가 판정. 평가 전용 데이터는 만드는 쪽에 넘기지 않음. 합격 기준은 낮추지 않음</li>
-                  <li>6세대에서 멈추도록 본인이 결정. 자체 기준 불합격이 남은 상태였고, 인게임 판정에서 양호로 확인</li>
-                  <li>남은 불합격과 위험은 문서에 그대로 남김</li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </article>
+        <figure class="gen-cycle">
+          <figcaption class="visually-hidden">세대 반복 순환: 생성, 독립 평가, 불합격 사유, 기준 보강, 다음 세대를 거쳐 다시 생성으로. 사람은 고리 바깥에서 방향과 중단 시점을 정하고 인게임 최종 판정을 함.</figcaption>
+          <p class="gen-human is-in"><span class="gen-who">사람 <span lang="en">Person</span></span>방향과 중단 시점 결정</p>
+          <div class="gen-zone">
+            <p class="gen-zone-label">에이전트 <span lang="en">Agents</span></p>
+            <ol class="gen-loop">
+              <li><b>생성</b><span lang="en">Generate</span></li>
+              <li><b>독립 평가</b><span lang="en">Independent evaluation</span></li>
+              <li><b>불합격 사유</b><span lang="en">Failure reasons</span></li>
+              <li><b>기준 보강</b><span lang="en">Tighten criteria</span></li>
+              <li><b>다음 세대</b><span lang="en">Next generation</span></li>
+            </ol>
+            <p class="gen-return" aria-hidden="true">다음 세대 → 다시 생성</p>
+          </div>
+          <p class="gen-human is-out"><span class="gen-who">사람 <span lang="en">Person</span></span>인게임 최종 판정</p>
+        </figure>
 
-        <article class="ai-case">
-          <p class="ai-case-tag">Drink Can</p>
-          <h4>수치는 개선, 체감은 기각 <span lang="en">Better numbers, rejected in play</span></h4>
-          <dl>
-            <div>
-              <dt>무슨 일 <span lang="en">What happened</span></dt>
-              <dd>
-                <ul>
-                  <li>캔 교체 순간 2프레임 공백이 생김</li>
-                  <li>에이전트가 이를 없애는 방식을 28개 조합으로 측정해 공백 0/28 달성</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>어떻게 잡혔나 <span lang="en">How it was caught</span></dt>
-              <dd>
-                <ul>
-                  <li>본인 인게임 판정: 깜빡임보다 두 캔이 겹쳐 보이는 쪽이 더 어색함</li>
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>무엇이 바뀌었나 <span lang="en">What changed</span></dt>
-              <dd>
-                <ul>
-                  <li>되돌림</li>
-                  <li>남은 원칙: 수치 개선 ≠ 체감 개선. 최종 판정은 실기</li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </article>
-      </div>
+        <div class="gen-record">
+          <p class="gen-record-tag">실제 기록 <span lang="en">Real run</span> · Sleeve Roll</p>
+          <h4>처진 소매 정규화 알고리즘 <span lang="en">Normalizing drooping sleeves</span></h4>
+          <p class="gen-why"><b>계기</b> 처진 소매 의상에서 인게임 판정이 세 번 연속 실패. 본인이 방향 전환 지시: 옷마다 대응하지 말고 일반 알고리즘을 세우고, 합격할 때까지 세대 반복</p>
+
+          <div class="gen-stepper" data-gen-stepper>
+            <ol class="gen-list">
+              <li id="gen-1" data-gen="1">
+                <p class="gen-name">1세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 일반 옷에서 오작동</p>
+              </li>
+              <li id="gen-2" data-gen="2">
+                <p class="gen-name">2세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 후보마다 일반 옷 결과가 바뀜, 잡음, 뒤집힘</p>
+              </li>
+              <li id="gen-3" data-gen="3">
+                <p class="gen-name">3세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 기본값은 대부분 통과. 특정 슬라이더 조합에서 처진 소매 실패</p>
+              </li>
+              <li id="gen-4" data-gen="4" data-mark="본인">
+                <p class="gen-name">4세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 기본값 처진 소매 12개와 렌더 통과. 슬라이더 95개 설정 중 19개가 기존 방식보다 나쁨</p>
+                <p class="gen-mark">인게임 첫 양호 판정 (본인)</p>
+              </li>
+              <li id="gen-5" data-gen="5">
+                <p class="gen-name">5세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 기준 5개 항목에서 불합격</p>
+              </li>
+              <li id="gen-6" data-gen="6" data-mark="본인">
+                <p class="gen-name">6세대 <span class="gen-fail">자체 기준 불합격</span></p>
+                <p class="gen-block"><b>막힌 곳</b> 기준 2개 항목만 남고 나머지 9개 통과</p>
+                <p class="gen-mark">본인이 여기서 중단 결정</p>
+              </li>
+            </ol>
+          </div>
+
+          <p class="gen-end"><b>결말</b> 6세대를 시험 아바타 6개에 올려 본인이 인게임에서 전부 확인, 양호 판정 후 배포. 자체 기준의 불합격 2개 항목과 남은 위험 6가지는 심각도 순으로 문서에 그대로 기록</p>
+
+          <div class="gen-figures">
+            <section aria-labelledby="gen-fig-title">
+              <p id="gen-fig-title" class="ai-stats-label">4세대 수치, 기존 방식 대비 <span lang="en">Gen 4 vs. previous method</span></p>
+              <dl class="gen-deltas">
+                <div><dt>판 모양 결함 지표</dt><dd><s>68.41</s> → <b>14.29</b></dd></div>
+                <div><dt>늘어남 지표</dt><dd><s>37.94</s> → <b>0</b></dd></div>
+                <div><dt>일반 소매 이동</dt><dd><b>0</b></dd></div>
+              </dl>
+            </section>
+            <section aria-labelledby="gen-scale-title">
+              <p id="gen-scale-title" class="ai-stats-label">평가 규모 <span lang="en">Evaluation set</span></p>
+              <dl class="gen-deltas">
+                <div><dt>처진 소매 개발용</dt><dd><b>12</b>개</dd></div>
+                <div><dt>평가 전용</dt><dd><b>12</b>개</dd></div>
+                <div><dt>슬라이더 설정</dt><dd><b>240</b>개</dd></div>
+              </dl>
+            </section>
+          </div>
+        </div>
+
+        <p class="ai-stats-label gen-rules-title">이 방식이 성립하는 규칙 <span lang="en">Rules that make it work</span></p>
+        <ol class="gen-rules">
+          <li><b>만드는 에이전트와 평가하는 에이전트를 분리</b><span lang="en">Builder and evaluator are different agents</span></li>
+          <li><b>평가 전용 데이터의 세부는 만드는 쪽에 넘기지 않음</b>ML의 train / test 분리와 같은 발상<span lang="en">Held-out evaluation data</span></li>
+          <li><b>합격 기준은 낮추지 않음</b>기준을 네 번 고쳤고(v1 → v4) 전부 항목 추가나 재정의, 이유를 기록<span lang="en">The bar is never lowered</span></li>
+          <li><b>수치상 불합격이 남아도 숨기지 않음</b>최종 판정은 사람의 인게임 실기<span lang="en">Remaining failures stay on record</span></li>
+        </ol>
+
+        <div class="gen-more">
+          <p><b>같은 방식의 다른 예 · Drink Can 쥐는 손 자동 맞춤</b></p>
+          <ul>
+            <li>관점이 다른 AI 평가자 4명(접촉 / 관절 / 실제 쥐는 법 / 알고리즘)이 렌더를 보고 7라운드 반복, 평균 5점 → 7.3점</li>
+            <li>마지막에는 이름을 가린 블라인드 비교로 고정 자세와 대결시켜 자동 맞춤을 기본값으로 채택</li>
+          </ul>
+          <p class="gen-limit"><b>한계</b> 처진 소매 실물 표본이 한 계열 의상뿐이라, 다른 의상으로의 일반화는 검증하지 못함</p>
+        </div>
+      </section>
 
       <div class="ai-bottom">
         <section class="ai-guard" aria-labelledby="ai-guard-title">
