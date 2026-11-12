@@ -46,6 +46,7 @@
 | `id` | O | 겹치지 않는 식별자 |
 | `track` | O | `backend`, `vrchat`, `tools` 중 하나. `tools`는 카드가 아니라 아래쪽 짧은 목록으로 표시 |
 | `title` | O | 카드 제목 |
+| `published_at` | | BOOTH 공개일 `YYYY-MM-DD`. `vrchat` 축은 이 값의 최신순으로 정렬(값 없으면 뒤로). 화면에는 표시 안 함 |
 | `summary_ko` / `summary_en` | | 한국어 설명 / 영어 보조 줄 |
 | `stack` | | 기술 chip |
 | `links` | | `repo`, `repo2`, `demo`, `booth`, `video` 중 아무 키. 빈 값은 무시 |
@@ -53,7 +54,7 @@
 | `image` | | 없으면 `null`. 이미지 없는 카드도 정상 표시, 파일이 없으면 이미지 영역만 빠짐. `width`/`height`는 실제 픽셀 크기 |
 | `highlights_ko` | | 카드 안 bullet 목록 |
 
-- 배열 순서 = 화면 순서
+- 배열 순서 = 화면 순서 (`vrchat` 축만 `published_at` 최신순)
 - 이미지는 `assets/`에 두고 수백 KB 이하로 유지
 - JSON 문법 오류나 파일 읽기 실패 시 카드 자리에 안내 문구 표시. 수정 후 로컬 확인 권장
 
@@ -69,4 +70,4 @@ python -m http.server 8000
 
 ## 이미지 출처
 
-`assets/`의 이미지는 모두 본인 저장소에서 가져옴: `footprint-demo/docs/screenshots/`, `vrchat-*/docs/images/01_thumbnail.jpg`.
+`assets/`의 이미지는 모두 본인 저장소·상품 페이지에서 가져옴: `footprint-demo/docs/screenshots/`, `vrchat-*/docs/images/01_thumbnail.jpg`, `sleeve-roll.jpg`(BOOTH 상품 대표 이미지).

@@ -123,6 +123,8 @@
   const render = (projects) => {
     const byTrack = { backend: [], vrchat: [], tools: [] };
     for (const p of projects) if (byTrack[p.track]) byTrack[p.track].push(p);
+    // VRChat: newest BOOTH release first; items without a date go last (stable otherwise).
+    byTrack.vrchat.sort((a, b) => (b.published_at || "").localeCompare(a.published_at || ""));
 
     for (const track of ["backend", "vrchat"]) {
       const list = lists[track];

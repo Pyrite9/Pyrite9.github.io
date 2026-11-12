@@ -61,22 +61,24 @@
     "highlights_ko": []
   },
   {
-    "id": "vrchat-wheelchair",
+    "id": "vrchat-sleeve-roll",
     "track": "vrchat",
-    "title": "Wheelchair",
-    "summary_ko": "모든 humanoid avatar에 쓸 수 있는 범용 휠체어 기믹. Desktop, VR, FBT 지원.",
-    "summary_en": "Wheelchair gimmick for any humanoid avatar. Desktop / VR / FBT.",
+    "published_at": "2026-11-07",
+    "title": "Sleeve Roll",
+    "summary_ko": "소매 걷기 기믹. 빌드할 때 의상 mesh에서 걷힌 소매 모양을 계산, 패키지에 shape key·mesh 데이터 미포함.",
+    "summary_en": "Sleeve rolling computed from the garment mesh at build time. No shape key or mesh data shipped.",
     "stack": ["C#", "Unity", "Modular Avatar", "NDMF"],
     "links": {
-      "repo": "https://github.com/Pyrite9/vrchat-wheelchair",
-      "booth": "https://pyrite9.booth.pm/items/9004771"
+      "repo": "https://github.com/Pyrite9/vrchat-sleeve-roll",
+      "booth": "https://pyrite9.booth.pm/items/9111596"
     },
-    "image": { "src": "assets/wheelchair.jpg", "width": 1200, "height": 1200, "alt": "Pyrite9 Wheelchair 썸네일" },
-    "highlights_ko": ["무료 배포, 현재 1.1.2", "README 3개 국어(JP/EN/KR)"]
+    "image": { "src": "assets/sleeve-roll.jpg", "width": 1024, "height": 1024, "alt": "Pyrite9 Sleeve Roll 썸네일" },
+    "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
   },
   {
     "id": "vrchat-pulse-watch",
     "track": "vrchat",
+    "published_at": "2026-10-31",
     "title": "Pulse Watch",
     "summary_ko": "시계를 보듯 손목을 눈 쪽으로 돌리면 홀로그램이 펼쳐지고, 손목을 떼면 접히는 손목시계 기믹.",
     "summary_en": "Pop-up wristwatch: turn your wrist to your eyes and a hologram opens.",
@@ -92,6 +94,7 @@
   {
     "id": "vrchat-drink-can",
     "track": "vrchat",
+    "published_at": "2026-10-25",
     "title": "Drink Can",
     "summary_ko": "음료 캔 기믹. 4가지 크기 preset 선택 또는 높이·지름 직접 지정 가능.",
     "summary_en": "Drink can gimmick with four size presets.",
@@ -105,18 +108,19 @@
     "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
   },
   {
-    "id": "vrchat-sleeve-roll",
+    "id": "vrchat-wheelchair",
     "track": "vrchat",
-    "title": "Sleeve Roll",
-    "summary_ko": "소매 걷기 기믹. 빌드할 때 의상 mesh에서 걷힌 소매 모양을 계산, 패키지에 shape key·mesh 데이터 미포함.",
-    "summary_en": "Sleeve rolling computed from the garment mesh at build time. No shape key or mesh data shipped.",
+    "published_at": "2026-10-18",
+    "title": "Wheelchair",
+    "summary_ko": "모든 humanoid avatar에 쓸 수 있는 범용 휠체어 기믹. Desktop, VR, FBT 지원.",
+    "summary_en": "Wheelchair gimmick for any humanoid avatar. Desktop / VR / FBT.",
     "stack": ["C#", "Unity", "Modular Avatar", "NDMF"],
     "links": {
-      "repo": "https://github.com/Pyrite9/vrchat-sleeve-roll",
-      "booth": "https://pyrite9.booth.pm/items/9111596"
+      "repo": "https://github.com/Pyrite9/vrchat-wheelchair",
+      "booth": "https://pyrite9.booth.pm/items/9004771"
     },
-    "image": null,
-    "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
+    "image": { "src": "assets/wheelchair.jpg", "width": 1200, "height": 1200, "alt": "Pyrite9 Wheelchair 썸네일" },
+    "highlights_ko": ["무료 배포, 현재 1.1.2", "README 3개 국어(JP/EN/KR)"]
   },
   {
     "id": "maplestory-janus-timer",
