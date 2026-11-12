@@ -27,7 +27,7 @@ html.sw-on :is(
 }
 
 html.sw-on .sw-in {
-  transition: opacity 0.3s ease-out, border-color 0.2s, translate 0.2s;
+  transition: opacity 0.3s ease-out, border-color 0.2s, translate 0.2s, box-shadow 0.2s;
 }
 
 html.sw-on body { position: relative; }

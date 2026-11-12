@@ -1,21 +1,45 @@
 /* ---------- Tokens ---------- */
 :root {
-  --bg-light: #f7f6f2;
+  --bg-light: #f6f2e9;
   --bg-dark: #141517;
   --surface-light: #ffffff;
   --surface-dark: #1d1f22;
   --text-light: #1c1d1f;
   --text-dark: #e8e6e1;
-  --muted-light: #5d6066;
+  --muted-light: #52555c;
   --muted-dark: #a3a6ab;
-  --line-light: #dedcd5;
+  --line-light: #d3c9b4;
   --line-dark: #2f3236;
-  --accent-light: #8a5a12;  /* pyrite gold, darkened for contrast */
+  --accent-light: #835410;  /* pyrite gold, darkened for text contrast */
   --accent-dark: #e0b25a;
   --accent-text-light: #ffffff;
   --accent-text-dark: #1c1508;
-  --chip-light: #efece4;
+  --chip-light: #f0e5cc;
   --chip-dark: #26292d;
+  /* Large gold surfaces (buttons, underlines, bands) and the text on them */
+  --fill-light: #e2a83a;
+  --fill-dark: #e0b25a;
+  --fill-text-light: #241803;
+  --fill-text-dark: #1c1508;
+  /* Alternating section band */
+  --band-light: #ede5d3;
+  --band-dark: #141517;
+  /* Depth: light only (dark keeps its flat look) */
+  --shadow-1-light: rgb(70 48 10 / 0.07);
+  --shadow-1-dark: transparent;
+  --shadow-2-light: rgb(70 48 10 / 0.10);
+  --shadow-2-dark: transparent;
+  /* Hero backdrop: soft gold glow + dot grid */
+  --glow-light: rgb(226 168 58 / 0.26);
+  --glow-dark: transparent;
+  --dot-light: rgb(131 84 16 / 0.13);
+  --dot-dark: transparent;
+  /* Hairline ring around chips and thumbnails */
+  --ring-light: rgb(131 84 16 / 0.20);
+  --ring-dark: transparent;
+  /* Short gold mark under section titles (light only) */
+  --mark-light: #e2a83a;
+  --mark-dark: transparent;
 
   /* Fallback: system preference without light-dark() */
   --bg: var(--bg-light);
@@ -26,6 +50,15 @@
   --accent: var(--accent-light);
   --accent-text: var(--accent-text-light);
   --chip: var(--chip-light);
+  --fill: var(--fill-light);
+  --fill-text: var(--fill-text-light);
+  --band: var(--band-light);
+  --shadow-1: var(--shadow-1-light);
+  --shadow-2: var(--shadow-2-light);
+  --glow: var(--glow-light);
+  --dot: var(--dot-light);
+  --ring: var(--ring-light);
+  --mark: var(--mark-light);
 
   @media (prefers-color-scheme: dark) {
     --bg: var(--bg-dark);
@@ -36,6 +69,15 @@
     --accent: var(--accent-dark);
     --accent-text: var(--accent-text-dark);
     --chip: var(--chip-dark);
+    --fill: var(--fill-dark);
+    --fill-text: var(--fill-text-dark);
+    --band: var(--band-dark);
+    --shadow-1: var(--shadow-1-dark);
+    --shadow-2: var(--shadow-2-dark);
+    --glow: var(--glow-dark);
+    --dot: var(--dot-dark);
+    --ring: var(--ring-dark);
+    --mark: var(--mark-dark);
   }
 
   @supports (color: light-dark(white, black)) {
@@ -47,6 +89,15 @@
     --accent: light-dark(var(--accent-light), var(--accent-dark));
     --accent-text: light-dark(var(--accent-text-light), var(--accent-text-dark));
     --chip: light-dark(var(--chip-light), var(--chip-dark));
+    --fill: light-dark(var(--fill-light), var(--fill-dark));
+    --fill-text: light-dark(var(--fill-text-light), var(--fill-text-dark));
+    --band: light-dark(var(--band-light), var(--band-dark));
+    --shadow-1: light-dark(var(--shadow-1-light), var(--shadow-1-dark));
+    --shadow-2: light-dark(var(--shadow-2-light), var(--shadow-2-dark));
+    --glow: light-dark(var(--glow-light), var(--glow-dark));
+    --dot: light-dark(var(--dot-light), var(--dot-dark));
+    --ring: light-dark(var(--ring-light), var(--ring-dark));
+    --mark: light-dark(var(--mark-light), var(--mark-dark));
   }
 
   color-scheme: light dark;
@@ -254,7 +305,7 @@ h1 {
   transition: border-color 0.15s, background-color 0.15s;
 }
 .button:hover { border-color: var(--accent); }
-.button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.button.primary { background: var(--fill); color: var(--fill-text); border-color: var(--fill); }
 .button.primary [lang="en"] { font-weight: 400; opacity: 0.85; }
 
 /* ---------- Sections ---------- */
@@ -321,7 +372,7 @@ h1 {
   transition: background-color 0.15s, color 0.15s;
 }
 .filter button:hover { color: var(--text); }
-.filter button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.filter button[aria-pressed="true"] { background: var(--fill); color: var(--fill-text); }
 
 .tracks {
   display: grid;
@@ -339,7 +390,7 @@ h1 {
   font-size: 1.125rem;
   padding-bottom: 0.6rem;
   margin-bottom: 1.25rem;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--fill);
 }
 .track-title.small { font-size: 1rem; border-bottom-width: 1px; border-color: var(--line); }
 
@@ -426,7 +477,7 @@ h1 {
 
 /* ---------- Experience ---------- */
 .timeline-item {
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--fill);
   padding-left: 1.25rem;
 }
 .timeline-item h3 { font-size: 1.25rem; }
@@ -471,3 +522,75 @@ h1 {
   from { opacity: 0; translate: 0 6px; }
   to { opacity: 1; translate: 0 0; }
 }
+
+/* ---------- Light theme depth ----------
+   Colors come from tokens whose dark values are transparent or equal to the old
+   dark look, so these rules leave dark mode unchanged. Non-color values that only
+   light mode needs are switched by the same rule the toggle uses. */
+:root {
+  --media-pad: 0px;
+  --media-radius: 0px;
+  --h2-pad: 0px;
+}
+@media (prefers-color-scheme: light) {
+  :root:not(:has(> head > meta[name="color-scheme"][content="dark"])) {
+    --media-pad: 8px;
+    --media-radius: 6px;
+    --h2-pad: 0.55rem;
+  }
+}
+:root:has(> head > meta[name="color-scheme"][content="light"]) {
+  --media-pad: 8px;
+  --media-radius: 6px;
+  --h2-pad: 0.55rem;
+}
+
+/* Full-bleed backdrops behind .wrap sections without widening the page */
+body { overflow-x: clip; }
+.hero, main > .section { position: relative; isolation: isolate; }
+.hero::before,
+main > .section:nth-of-type(even)::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline: calc(50% - 50vw);
+  z-index: -1;
+  pointer-events: none;
+}
+.hero::before {
+  background:
+    radial-gradient(ellipse 55% 75% at 85% 25%, var(--glow), transparent 70%),
+    radial-gradient(ellipse 40% 60% at 5% 90%, var(--glow), transparent 70%),
+    radial-gradient(circle, var(--dot) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+main > .section:nth-of-type(even)::before { background: var(--band); }
+
+.section h2 {
+  padding-bottom: var(--h2-pad);
+  background: linear-gradient(var(--mark), var(--mark)) 0 100% / 2.25rem 3px no-repeat;
+}
+
+.site-header { box-shadow: 0 6px 18px var(--shadow-1); }
+
+.card,
+.facts,
+.filter,
+.theme-toggle,
+.button:not(.primary) {
+  box-shadow: 0 1px 2px var(--shadow-1), 0 6px 18px var(--shadow-2);
+}
+.button.primary { box-shadow: 0 2px 8px var(--shadow-2); }
+.card:hover { box-shadow: 0 2px 4px var(--shadow-1), 0 14px 30px var(--shadow-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: border-color 0.2s, translate 0.2s, box-shadow 0.2s; }
+}
+
+.card-media { padding: var(--media-pad); }
+.card-media img {
+  border-radius: var(--media-radius);
+  box-shadow: 0 0 0 1px var(--ring);
+}
+
+.chips li { box-shadow: inset 0 0 0 1px var(--ring); }
+
