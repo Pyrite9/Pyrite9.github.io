@@ -666,7 +666,8 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
 .ai-role ul { margin: 0; padding-left: 1.1rem; }
 .ai-role li { margin: 0.25rem 0; }
 
-/* Workflow: numbered steps, a row on wide screens */
+/* Workflow: numbered steps stacked top to bottom, so the order reads at any width.
+   From 640px each step is one row: number | title | text + evidence. */
 .ai-steps {
   list-style: none;
   counter-reset: ai-step;
@@ -674,8 +675,6 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
   padding: 0;
   display: grid;
   gap: 0.75rem;
-  @media (min-width: 640px) { grid-template-columns: 1fr 1fr; }
-  @media (min-width: 1000px) { grid-template-columns: repeat(5, 1fr); }
 }
 .ai-steps > li {
   counter-increment: ai-step;
@@ -708,6 +707,19 @@ main > .section:nth-of-type(even)::before { background: var(--band); }
   color: var(--muted);
 }
 .ai-steps p { margin: 0; }
+@media (min-width: 640px) {
+  .ai-steps > li {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(9rem, 14rem) 1fr;
+    column-gap: 1.1rem;
+    row-gap: 0.4rem;
+    align-items: start;
+    padding: 1rem 1.25rem;
+  }
+  .ai-steps > li::before { grid-column: 1; grid-row: 1 / span 2; }
+  .ai-steps h4 { grid-column: 2; grid-row: 1 / span 2; margin: 0.15rem 0 0; }
+  .ai-steps > li > p { grid-column: 3; }
+}
 .ai-proof {
   margin-top: auto !important;
   padding-top: 0.5rem;
