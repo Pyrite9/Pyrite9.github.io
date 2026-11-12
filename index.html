@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try { document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark"; } catch (e) {}
+  </script>
+  <title>김동건 · KIM DONGGUN</title>
+  <meta name="description" content="백엔드 지망 개발자이자 VRChat 기믹 제작자 김동건의 포트폴리오. Portfolio of KIM DONGGUN, backend developer in training and VRChat gimmick maker.">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">Pyrite9</a>
+      <nav aria-label="주요 섹션">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" id="theme-toggle">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span class="visually-hidden label-to-dark">어두운 테마로 전환 (Switch to dark theme)</span>
+        <span class="visually-hidden label-to-light">밝은 테마로 전환 (Switch to light theme)</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <p class="eyebrow">주도적 트러블슈터 <span lang="en">/ Proactive troubleshooter</span></p>
+      <h1 id="hero-title">김동건 <span class="name-en" lang="en">KIM DONGGUN</span></h1>
+      <p class="lead">백엔드 서버 엔지니어 목표. VRChat 아바타 기믹 제작 및 무료 배포.</p>
+      <p class="lead-en" lang="en">Backend developer in training. I also build and give away VRChat avatar gimmicks.</p>
+      <ul class="hero-links">
+        <li><a class="button primary" href="#projects">프로젝트 보기 <span lang="en">Projects</span></a></li>
+        <li><a class="button" href="https://github.com/Pyrite9">GitHub</a></li>
+        <li><a class="button" href="https://pyrite9.booth.pm/">BOOTH</a></li>
+      </ul>
+    </section>
+
+    <section class="section wrap" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About <span class="h-sub">소개</span></h2>
+      <div class="about-grid">
+        <div class="prose">
+          <p>영진전문대학교 AI 소프트웨어 학과 2학년. 백엔드 서버 엔지니어 목표로 Spring Boot 기반 서비스 개발, 대학원 진학 준비 중.</p>
+          <p class="en" lang="en">Second-year AI Software student at Yeungjin College, aiming to become a backend server engineer and preparing for graduate school.</p>
+          <p>해군 세종대왕함에서 26개월 동안 정보통신병·정보통신부사관으로 근무. 함내 전산망과 서버, 통신 장비 운용.</p>
+          <p class="en" lang="en">26 months in the ROK Navy running shipboard networks, servers and communications.</p>
+          <p>개발 외 활동으로 VRChat 아바타용 기믹 제작, GitHub와 BOOTH에 무료 공개. 일본어·영어·한국어 문서 작성.</p>
+          <p class="en" lang="en">On the side, I publish free VRChat gimmicks with documentation in Japanese, English and Korean.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>학교 <span lang="en">School</span></dt><dd>영진전문대학교 AI 소프트웨어 학과</dd></div>
+          <div><dt>목표 <span lang="en">Goal</span></dt><dd>Backend server engineer</dd></div>
+          <div><dt>진로 <span lang="en">Next</span></dt><dd>대학원 진학 준비 중</dd></div>
+          <div><dt>병역 <span lang="en">Service</span></dt><dd>대한민국 해군, 2024 – 2026</dd></div>
+          <div><dt>GitHub</dt><dd><a href="https://github.com/Pyrite9">Pyrite9</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section wrap" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects <span class="h-sub">프로젝트</span></h2>
+      <p class="section-intro">두 갈래 작업: 백엔드·웹 서비스와 VRChat 기믹. <span lang="en">Two tracks: backend/web and VRChat gimmicks.</span></p>
+
+      <div class="filter" role="group" aria-label="프로젝트 축 선택 (Filter projects)">
+        <button type="button" data-filter="all" aria-pressed="true">전체 <span lang="en">All</span></button>
+        <button type="button" data-filter="backend" aria-pressed="false">Backend / Web</button>
+        <button type="button" data-filter="vrchat" aria-pressed="false">VRChat</button>
+      </div>
+
+      <div class="tracks" id="tracks" data-filter="all">
+        <section class="track" data-track="backend" aria-labelledby="track-backend">
+          <h3 id="track-backend" class="track-title">Backend / Web <span class="h-sub">백엔드 · 웹</span></h3>
+          <div class="card-list" data-list="backend"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
+        </section>
+        <section class="track" data-track="vrchat" aria-labelledby="track-vrchat">
+          <h3 id="track-vrchat" class="track-title">VRChat Gimmicks <span class="h-sub">VRChat 기믹</span></h3>
+          <div class="card-list" data-list="vrchat"><p class="status">불러오는 중… <span lang="en">Loading</span></p></div>
+        </section>
+      </div>
+
+      <section class="tools" aria-labelledby="track-tools">
+        <h3 id="track-tools" class="track-title small">Tools &amp; etc. <span class="h-sub">그 밖의 도구</span></h3>
+        <ul class="tool-list" data-list="tools"></ul>
+      </section>
+    </section>
+
+    <section class="section wrap" id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills <span class="h-sub">기술</span></h2>
+      <div class="skill-grid">
+        <div>
+          <h3>Backend</h3>
+          <ul class="chips"><li>Java</li><li>Spring Boot 3</li><li>JPA</li><li>Spring Security (JWT)</li><li>PostgreSQL</li><li>SQL (Oracle)</li><li>Python</li></ul>
+        </div>
+        <div>
+          <h3>Frontend</h3>
+          <ul class="chips"><li>React</li><li>JavaScript</li><li>HTML / CSS</li></ul>
+        </div>
+        <div>
+          <h3>Infra / Network</h3>
+          <ul class="chips"><li>Docker</li><li>Linux (Arch, Ubuntu)</li><li>VMware</li><li>Cisco Networking</li></ul>
+        </div>
+        <div>
+          <h3>VRChat / Unity</h3>
+          <ul class="chips"><li>C#</li><li>Unity</li><li>VRChat SDK</li><li>Modular Avatar / NDMF</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title">Experience <span class="h-sub">경력</span></h2>
+      <article class="timeline-item">
+        <div class="timeline-head">
+          <h3>대한민국 해군 · DDG-991 세종대왕함 <span class="h-sub" lang="en">Republic of Korea Navy</span></h3>
+          <p class="meta">2024.01.02 – 2026.03.01 (26개월) · 기동함대사령부 제71기동전대</p>
+        </div>
+        <p class="role">정보통신병 20개월 → 정보통신부사관 6개월 <span lang="en">IT &amp; communications specialist, then petty officer</span></p>
+        <ul class="bullets">
+          <li>함내 PC 150대 이상과 근거리전산망 유지보수</li>
+          <li>L2/L3 스위치, Cisco 라우터, UTM(AhnLab TrusGuard) 운용</li>
+          <li>IBM-S814 + OracleDB 함정 서버 관리</li>
+          <li>무선·위성통신 및 전군 VTC 운용</li>
+          <li>2025년 후반기 71기동전대 근무유공자 표창(간부)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section wrap" id="certifications" aria-labelledby="cert-title">
+      <h2 id="cert-title">Certifications <span class="h-sub">자격</span></h2>
+      <ul class="cert-list">
+        <li>정보처리산업기사 <span lang="en">Industrial Engineer Information Processing</span></li>
+        <li>정보처리기능사 <span lang="en">Craftsman Information Processing</span></li>
+        <li>컴퓨터활용능력 2급 <span lang="en">Computer Specialist in Spreadsheet &amp; Database, Level 2</span></li>
+        <li>ITQ 3종 A (한글 · 한셀 · 파워포인트)</li>
+        <li>초경량비행장치 무인멀티콥터 1종 조종자 <span lang="en">Drone pilot, Class 1</span></li>
+      </ul>
+    </section>
+
+    <section class="section wrap" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact <span class="h-sub">연락처</span></h2>
+      <ul class="contact-list">
+        <li><span class="contact-label">Email</span><a href="mailto:arlaehdrjs@gmail.com">arlaehdrjs@gmail.com</a></li>
+        <li><span class="contact-label">GitHub</span><a href="https://github.com/Pyrite9">github.com/Pyrite9</a></li>
+        <li><span class="contact-label">BOOTH</span><a href="https://pyrite9.booth.pm/">pyrite9.booth.pm</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; 2026 KIM DONGGUN (Pyrite9)</p>
+    </div>
+  </footer>
+</body>
+</html>

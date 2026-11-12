@@ -1,0 +1,170 @@
+[
+  {
+    "id": "footprint-demo",
+    "track": "backend",
+    "title": "발자국 footprint",
+    "summary_ko": "조별과제에서 누가 언제 무엇을 했는지 기록으로 남기고, 동료평가 때 그 기록을 근거로 보여 주는 서비스. 원칙은 \"판단은 사람, 시스템은 근거만\" — 점수·순위·진척률 계산 없음.",
+    "summary_en": "Team-project activity log and peer-review support service. The system shows evidence; people make the judgement.",
+    "stack": ["Spring Boot 3", "JPA", "Spring Security (JWT)", "PostgreSQL", "Docker", "React"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/footprint-demo",
+      "demo": "https://pyrite9.github.io/MyCapstone/"
+    },
+    "link_labels": { "demo": "명세서 Spec" },
+    "image": { "src": "assets/footprint-team-home.png", "width": 1280, "height": 800, "alt": "발자국 조 홈 화면 스크린샷" },
+    "highlights_ko": [
+      "팀 조장 (team lead)",
+      "기능 15개, 단위 업무 29개 구현",
+      "docker compose up -d --build 한 번으로 실행",
+      "삭제·취소도 기록을 지우지 않고 상태로 남김",
+      "영진전문대 AI소프트웨어과 시스템설계 2026-2학기 3조 캡스톤"
+    ]
+  },
+  {
+    "id": "mycapstone",
+    "track": "backend",
+    "title": "MyCapstone",
+    "summary_ko": "발자국 프로젝트의 명세서 저장소. 주제 후보 비교부터 최종 명세까지 수록.",
+    "summary_en": "Specification repository for footprint.",
+    "stack": ["HTML"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/MyCapstone",
+      "demo": "https://pyrite9.github.io/MyCapstone/"
+    },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "footprint-study",
+    "track": "backend",
+    "title": "footprint-study",
+    "summary_ko": "발자국 팀 학습용 저장소 (09.18 ~ 10.16).",
+    "summary_en": "Team study repository for footprint.",
+    "stack": ["Study"],
+    "links": { "repo": "https://github.com/Pyrite9/footprint-study" },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "spring-boot-class-2026",
+    "track": "backend",
+    "title": "Spring Boot 수업 · 스터디",
+    "summary_ko": "2026 Spring Boot 수업 실습 과제와 개인 스터디 저장소.",
+    "summary_en": "Spring Boot coursework and study.",
+    "stack": ["Java", "Spring Boot"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/spring-boot-class-2026",
+      "repo2": "https://github.com/Pyrite9/becoming-spring-boot-developer"
+    },
+    "link_labels": { "repo": "Class", "repo2": "Study" },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "vrchat-wheelchair",
+    "track": "vrchat",
+    "title": "Wheelchair",
+    "summary_ko": "모든 humanoid avatar에 쓸 수 있는 범용 휠체어 기믹. Desktop, VR, FBT 지원.",
+    "summary_en": "Wheelchair gimmick for any humanoid avatar. Desktop / VR / FBT.",
+    "stack": ["C#", "Unity", "Modular Avatar", "NDMF"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/vrchat-wheelchair",
+      "booth": "https://pyrite9.booth.pm/items/9004771"
+    },
+    "image": { "src": "assets/wheelchair.jpg", "width": 1200, "height": 1200, "alt": "Pyrite9 Wheelchair 썸네일" },
+    "highlights_ko": ["무료 배포, 현재 1.1.2", "README 3개 국어(JP/EN/KR)"]
+  },
+  {
+    "id": "vrchat-pulse-watch",
+    "track": "vrchat",
+    "title": "Pulse Watch",
+    "summary_ko": "시계를 보듯 손목을 눈 쪽으로 돌리면 홀로그램이 펼쳐지고, 손목을 떼면 접히는 손목시계 기믹.",
+    "summary_en": "Pop-up wristwatch: turn your wrist to your eyes and a hologram opens.",
+    "stack": ["C#", "Unity", "Modular Avatar"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/vrchat-pulse-watch",
+      "booth": "https://pyrite9.booth.pm/items/9072249",
+      "video": "https://youtu.be/8LORLEosO8A"
+    },
+    "image": { "src": "assets/pulse-watch.jpg", "width": 1200, "height": 1200, "alt": "Pyrite9 Pulse Watch 썸네일" },
+    "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
+  },
+  {
+    "id": "vrchat-drink-can",
+    "track": "vrchat",
+    "title": "Drink Can",
+    "summary_ko": "음료 캔 기믹. 4가지 크기 preset 선택 또는 높이·지름 직접 지정 가능.",
+    "summary_en": "Drink can gimmick with four size presets.",
+    "stack": ["C#", "Unity", "Modular Avatar"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/vrchat-drink-can",
+      "booth": "https://pyrite9.booth.pm/items/9038058",
+      "video": "https://youtu.be/X1OVrH2HJMI"
+    },
+    "image": { "src": "assets/drink-can.jpg", "width": 1200, "height": 1200, "alt": "Pyrite9 Drink Can 썸네일" },
+    "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
+  },
+  {
+    "id": "vrchat-sleeve-roll",
+    "track": "vrchat",
+    "title": "Sleeve Roll",
+    "summary_ko": "소매 걷기 기믹. 빌드할 때 의상 mesh에서 걷힌 소매 모양을 계산, 패키지에 shape key·mesh 데이터 미포함.",
+    "summary_en": "Sleeve rolling computed from the garment mesh at build time. No shape key or mesh data shipped.",
+    "stack": ["C#", "Unity", "Modular Avatar", "NDMF"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/vrchat-sleeve-roll",
+      "booth": "https://pyrite9.booth.pm/items/9111596"
+    },
+    "image": null,
+    "highlights_ko": ["무료 배포", "README 3개 국어(JP/EN/KR)"]
+  },
+  {
+    "id": "maplestory-janus-timer",
+    "track": "tools",
+    "title": "MapleStory Janus Timer",
+    "summary_ko": "게임 위에 투명하게 띄우는 스킬 쿨다운 오버레이 타이머. 전역 키 감지, exe 배포.",
+    "summary_en": "Skill cooldown overlay timer.",
+    "stack": ["Python", "PySide6", "pynput"],
+    "links": { "repo": "https://github.com/Pyrite9/MapleStory-Janus-Timer" },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "spinning-icosahedron",
+    "track": "tools",
+    "title": "spinning-icosahedron",
+    "summary_ko": "터미널 3D 정이십면체 렌더러. 회전 행렬, 원근 투영, backface culling, Z-buffer, flat shading 직접 구현.",
+    "summary_en": "Terminal 3D renderer built from scratch.",
+    "stack": ["Python", "NumPy"],
+    "links": { "repo": "https://github.com/Pyrite9/spinning-icosahedron" },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "x-fxtwitter-copier",
+    "track": "tools",
+    "title": "x-fxtwitter-copier",
+    "summary_ko": "X의 링크 복사를 가로채 fxtwitter.com 주소로 바꿔 클립보드에 넣는 userscript.",
+    "summary_en": "Userscript that rewrites copied X links to fxtwitter.com.",
+    "stack": ["JavaScript", "Userscript"],
+    "links": { "repo": "https://github.com/Pyrite9/x-fxtwitter-copier" },
+    "image": null,
+    "highlights_ko": []
+  },
+  {
+    "id": "early-practice",
+    "track": "tools",
+    "title": "초기 연습작 Early practice",
+    "summary_ko": "HTML5 Canvas 커서 효과(CursorSandevistan)와 vanilla JS Todo List(LocalStorage).",
+    "summary_en": "Canvas cursor effect and a vanilla JS todo list.",
+    "stack": ["HTML", "Canvas", "JavaScript"],
+    "links": {
+      "repo": "https://github.com/Pyrite9/CursorSandevistan",
+      "demo": "https://pyrite9.github.io/CursorSandevistan/",
+      "repo2": "https://github.com/Pyrite9/todo-list-js"
+    },
+    "link_labels": { "repo": "Sandevistan", "repo2": "Todo" },
+    "image": null,
+    "highlights_ko": []
+  }
+]
