@@ -506,6 +506,7 @@ h1 {
   border-bottom: 1px solid var(--line);
 }
 .contact-label { width: 5rem; color: var(--muted); font-size: 0.9375rem; }
+.contact-handle { font-family: var(--font-mono); font-weight: 600; }
 
 .site-footer {
   border-top: 1px solid var(--line);
